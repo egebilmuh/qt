@@ -1,0 +1,19 @@
+#ifndef SERNDERTHREAD_H
+#define SERNDERTHREAD_H
+
+#include <QObject>
+#include <QThread>as
+
+class SernderThread : public QThread
+{
+public:
+    SernderThread();
+    
+signals:
+    void sendData(float* packet);
+    
+protected:
+    void run() override;
+};
+
+#endif // SERNDERTHREAD_H
