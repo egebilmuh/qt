@@ -1,11 +1,15 @@
-#ifndef ALGORITHMQUEUE_H
-#define ALGORITHMQUEUE_H
+#ifndef DATAQUEUE_H
+#define DATAQUEUE_H
+#include <QQueue>
 
-
-class AlgorithmQueue
+template <class T>
+class DataQueue
 {
 public:
-    AlgorithmQueue();
+    DataQueue(){}
+
+private:
+    QQueue<T>* dataQueue;
 };
 
-#endif // ALGORITHMQUEUE_H
+#endif // DATAQUEUE_H

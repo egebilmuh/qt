@@ -1,6 +1,1 @@
-#include "algorithmqueue.h"
-
-AlgorithmQueue::AlgorithmQueue()
-{
-
-}
+#include "dataqueue.h"

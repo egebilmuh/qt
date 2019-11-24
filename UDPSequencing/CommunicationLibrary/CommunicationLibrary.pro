@@ -8,7 +8,7 @@ QT       += network
 
 QT       -= gui
 
-TARGET = CommunicationLibrary
+TARGET = CommLib
 TEMPLATE = lib
 
 DEFINES += COMMUNICATIONLIBRARY_LIBRARY
@@ -25,13 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        communicationlibrary.cpp
+        communicationlibrary.cpp \
+    packet.cpp
 
 HEADERS += \
         communicationlibrary.h \
-        communicationlibrary_global.h 
+        communicationlibrary_global.h \ 
+    packet.h
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
+DESTDIR = $$PWD/lib

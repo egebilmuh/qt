@@ -4,3 +4,8 @@ Algorithm::Algorithm()
 {
 
 }
+
+void Algorithm::runModel()
+{
+
+}

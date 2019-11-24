@@ -3,6 +3,10 @@
 
 #include <QObject>
 
+#include "connectionmanager.h"
+#include "preprocessor.h"
+#include "unitdata.h"
+
 class SPManager : public QObject
 {
     Q_OBJECT
@@ -12,6 +16,11 @@ public:
 signals:
 
 public slots:
+
+private:
+    ConnectionManager *conMan;
+    PreProcessor* preprocessor;
+    UnitData* datas;
 };
 
 #endif // SPMANAGER_H

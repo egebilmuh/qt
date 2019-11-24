@@ -6,41 +6,61 @@
 #include <QWaitCondition>
 #include <QMutexLocker>
 #include <QDebug>
+#include <QQueue>
+#include <QSharedPointer>
 
 #include <cstring>
 
 
 template<class T>
-class Data
+class DataQueue
 {
 public:
-    explicit Data(): written (false){}
+    explicit DataQueue(): written (false){}
 
-    void writeData(T *data)
+    void enqueueData(QSharedPointer<T> data)
     {
         QMutexLocker locker(&dataMutex);
-        std::memcpy(this->data, data, 1000* sizeof(T));
-        written = true;
+        this->data.enqueue(data);
+        //written = true;
         dataWaitCond.wakeAll();
     }
 
-    T* readData()
+    QSharedPointer<T> dequeDataOrWait()
     {
         QMutexLocker locker(&dataMutex);
 
-        if (!written) {
+        if (data.size() < 2) {
             qDebug() << "WaitingThreadId : " << QThread::currentThreadId();
             dataWaitCond.wait(&dataMutex);
-            qDebug() << "Wait point passed : " << QThread::currentThreadId();
+
+            //qDebug() << "Wait point passed : " << QThread::currentThreadId();
         }
 
-        qDebug() << "ReadThreadId : " << QThread::currentThreadId();
-        written = false;
-        return data;
+        //qDebug() << "ReadThreadId : " << QThread::currentThreadId();
+        //written = false;
+        return data.dequeue();
+    }
+
+    const QSharedPointer<T> head()
+    {
+        QMutexLocker locker(&dataMutex);
+        if (!data.isEmpty()) {
+            return data.head();
+        }
+        else {
+            return QSharedPointer<T>(nullptr);
+        }
+    }
+
+    int queueSize()
+    {
+        QMutexLocker locker(&dataMutex);
+            return data.size();
     }
 
 private:
-    T data[1000];
+    QQueue<QSharedPointer<T>> data;
     QMutex dataMutex;
     QWaitCondition dataWaitCond;
     bool written;

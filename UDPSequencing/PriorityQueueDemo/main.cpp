@@ -9,6 +9,8 @@ struct beam
     int packetNo;
     float data[1024];
 
+    beam():packetNo(0){}
+
     friend bool operator < (const beam& lhs, const beam& rhs)
     {
         return lhs.packetNo < rhs.packetNo;
@@ -20,16 +22,19 @@ struct beam
 };
 
 template<class T>
-bool myCompare()
-{
-    return true;
-}
+class MyCompare {
+public:
+
+  bool operator()( T a, T b) {
+    return (a) > (b);
+  }
+};
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    std::priority_queue<beam, std::vector<beam>, greater<vector<beam>::value_type>> pq;
+    std::priority_queue<beam, std::vector<beam>, MyCompare<beam>> pq;
 
     beam b;
     b.packetNo = 10;

@@ -32,12 +32,12 @@ void ReceiverThread::onData3Received(Packet p)
 
 void ReceiverThread::run()
 {
-    uint wait = 10;
+    uint wait = 5*2;
     while(!aborted)
     {
         if (buffer1.size() > wait)
         {
-            wait = 0;
+            //wait = 0;
             std::cout << "buffer1: ";
             if(nextPacket <= buffer1.top().sequence)
             {
@@ -73,6 +73,6 @@ void ReceiverThread::run()
 //            std::cout << "buffer3 emty" << std::endl;
 //        }
 
-        usleep(100000);
+        //usleep(100000);
     }
 }

@@ -6,7 +6,7 @@
 #include <QMutex>
 #include <QSharedPointer>
 
-#include "packet.h"
+#include "../CommunicationLibrary/packet.h"
 
 template< class T>
 void doDelete(T buf[]){

@@ -5,7 +5,16 @@
 #include <QThread>
 #include <QMutex>
 #include <queue>
-#include "packet.h"
+#include "../CommunicationLibrary/packet.h"
+
+template<class T>
+class MyCompare {
+public:
+
+  bool operator()( T a, T b) {
+    return (a) > (b);
+  }
+};
 
 
 class ReceiverThread : public QThread
@@ -27,9 +36,9 @@ private:
     QMutex mutex;
 
     uint nextPacket;
-    std::priority_queue<Packet, std::vector<Packet>, std::greater<std::vector<Packet>::value_type>> buffer1;
-    std::priority_queue<Packet, std::vector<Packet>, std::greater<std::vector<Packet>::value_type>> buffer2;
-    std::priority_queue<Packet, std::vector<Packet>, std::greater<std::vector<Packet>::value_type>> buffer3;
+    std::priority_queue<Packet, std::vector<Packet>, MyCompare<Packet>> buffer1;
+    std::priority_queue<Packet, std::vector<Packet>, MyCompare<Packet>> buffer2;
+    std::priority_queue<Packet, std::vector<Packet>, MyCompare<Packet>> buffer3;
 };
 
 #endif // RECEIVERTHREAD_H

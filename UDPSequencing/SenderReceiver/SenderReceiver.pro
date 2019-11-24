@@ -18,14 +18,14 @@ SOURCES += \
         main.cpp \
     receiverthread.cpp \
     senderthread.cpp \
-    packet.cpp
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
     receiverthread.h \
     senderthread.h \
-    packet.h
+
+LIBS += -L"$$PWD/../CommunicationLibrary/lib"
+LIBS += -lCommLib
+
+
+INCLUDEPATH += $$PWD/../CommunicationLibrary
+DEPENDPATH += $$PWD/../CommunicationLibrary

@@ -38,9 +38,9 @@ void SenderThread::sendData()
     packet2.sequence = counter2;
     packet3.sequence = counter2;
 
-    std::fill(packet1.data, packet1.data+dataSize, counter2+0);
-    std::fill(packet2.data, packet2.data+dataSize, counter2+1);
-    std::fill(packet3.data, packet3.data+dataSize, counter2+2);
+    std::fill(packet1.data, packet1.data+dataSize, (float)(counter2+0));
+    std::fill(packet2.data, packet2.data+dataSize, (float)(counter2+1));
+    std::fill(packet3.data, packet3.data+dataSize, (float)(counter2+2));
 
     emit sendData1(packet1);
     emit sendData2(packet2);

@@ -1,4 +1,10 @@
 TEMPLATE = subdirs
 
-SUBDIRS += PriorityQueueDemo \
-    SenderReceiver
+SUBDIRS += \
+    CommunicationLibrary\
+PriorityQueueDemo \
+    SenderReceiver \
+    Sender \
+    Receiver \
+
+DEPENDPATH = ORDERED
