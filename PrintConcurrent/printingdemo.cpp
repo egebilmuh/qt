@@ -70,7 +70,7 @@ void checkPrinter(bool &result)
             }
             ClosePrinter(hPrinter);
         }
-    }    
+    }
 }
 
 
